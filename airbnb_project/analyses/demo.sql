@@ -1,0 +1,1 @@
+select * from AIRBNB.staging.listings
