@@ -1,10 +1,12 @@
 {% set configs=[
         {
+            'model':'silver_bookings',
             'table':'AIRBNB.silver.silver_bookings',
             'alias':'silver_bookings',
             'columns':'silver_bookings.*'
         },
            {
+            'model':'silver_listings',
             'table':'AIRBNB.silver.silver_listings',
             'alias':'silver_listings',
             'columns':'silver_listings.HOST_ID,silver_listings.PROPERTY_TYPE, silver_listings.ROOM_TYPE,
@@ -14,6 +16,7 @@
             'join_condition': 'silver_listings.LISTING_ID = silver_bookings.LISTING_ID'
         },
         {
+            'model':'silver_hosts',
             'table':'AIRBNB.silver.silver_hosts',
             'alias':'silver_hosts',
             'columns':'silver_hosts.HOST_NAME, silver_hosts.HOST_SINCE,
@@ -32,8 +35,8 @@ select
 from 
 {% for config in configs %}
     {% if loop.first %} 
-        {{ config['table']}} as {{ config['alias']}} 
+        {{ ref(config['model'])}}  as {{ config['alias']}} 
     {% else %}
-        inner join {{config['table']}} as {{ config['alias']}} on {{ config['join_condition']}}
+        inner join {{ ref(config['model'])}}  as {{ config['alias']}} on {{ config['join_condition']}}
     {% endif%}
 {% endfor%}

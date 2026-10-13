@@ -1,4 +1,4 @@
-{% set configs=[
+{# {% set configs=[
         {
             'table':'AIRBNB.gold.obt',
             'alias':'gold_obt',
@@ -31,4 +31,18 @@ from
     {% else %}
         inner join {{config['table']}} as {{ config['alias']}} on {{ config['join_condition']}}
     {% endif%}
-{% endfor%}
+{% endfor%} #}
+
+
+SELECT
+    gold_obt.BOOKING_ID,
+    gold_obt.LISTING_ID,
+    gold_obt.HOST_ID,
+    gold_obt.NIGHTS_BOOKED,
+    gold_obt.TOTAL_AMOUNT,
+    gold_obt.ACCOMMODATES,
+    gold_obt.BEDROOMS,
+    gold_obt.BATHROOMS,
+    gold_obt.PRICE_PER_NIGHT,
+    gold_obt.RESPONSE_RATE
+FROM {{ ref('obt') }} AS gold_obt

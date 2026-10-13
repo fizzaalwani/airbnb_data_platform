@@ -1,2 +1,2 @@
-select * from AIRBNB.silver.silver_listings
+select * from AIRBNB.bronze.bronze_bookings
 
